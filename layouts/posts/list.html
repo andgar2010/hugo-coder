@@ -2,7 +2,7 @@
   {{ title (i18n (lower .Title)) | default .Title }} · {{ .Site.Title }}
 {{ end }}
 {{ define "content" }}
-  <section class="container list">
+  <section class="container list" data-pagefind-ignore>
     <header>
       <h1 class="title">
         <a class="title-link" href="{{ .Permalink | safeURL }}">

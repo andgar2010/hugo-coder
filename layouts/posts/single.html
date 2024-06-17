@@ -3,10 +3,10 @@
 {{ end }}
 {{ define "content" }}
   <section class="container post">
-    <article>
+    <article data-pagefind-body>
       <header>
         <div class="post-title">
-          <h1 class="title">
+          <h1 data-pagefind-meta="title" class="title">
             <a class="title-link" href="{{ .Permalink | safeURL }}">
               {{ .Title }}
             </a>
@@ -16,7 +16,10 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+              <time
+                data-pagefind-meta="date[datetime]"
+                datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}"
+              >
                 {{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006" ) }}
               </time>
             </span>
@@ -33,7 +36,7 @@
 
       <div class="post-content">
         {{ if .Params.featuredImage }}
-          <img src="{{ .Params.featuredImage | relURL }}" alt="Featured image"/>
+          <img src="{{ .Params.featuredImage | relURL }}" alt="Featured image" />
         {{ end }}
         {{ .Content }}
       </div>

@@ -18,27 +18,27 @@
       </div>
     </dialog>
     <noscript>You need JavaScript to view the comments.</noscript>
-    <script src="{{ $.Site.Params.purify.cdn }}"></script> 
+    <script src="{{ $.Site.Params.purify.cdn }}"></script>
     <script type="text/javascript">
-  
+
       const dialog = document.querySelector('dialog');
-  
+
       document.getElementById('replyButton').addEventListener('click', () => {
         dialog.showModal();
       });
-  
+
       document.getElementById('copyButton').addEventListener('click', () => {
         navigator.clipboard.writeText('https://{{ .host }}/@{{ .username }}/{{ .id }}');
       });
-  
+
       document.getElementById('cancelButton').addEventListener('click', () => {
         dialog.close();
       });
-  
+
       dialog.addEventListener('keydown', e => {
         if (e.key === 'Escape') dialog.close();
       });
-  
+
       const dateOptions = {
         year: "numeric",
         month: "numeric",
@@ -46,7 +46,7 @@
         hour: "numeric",
         minute: "numeric",
       };
-  
+
       function escapeHtml(unsafe) {
         return unsafe
              .replace(/&/g, "&amp;")
@@ -55,7 +55,7 @@
              .replace(/"/g, "&quot;")
              .replace(/'/g, "&#039;");
      }
-  
+
       document.getElementById("load-comment").addEventListener("click", function() {
         document.getElementById("load-comment").innerHTML = "Loading";
         fetch('https://{{ .host }}/api/v1/statuses/{{ .id }}/context')
@@ -64,7 +64,7 @@
           })
           .then(function(data) {
             if(data['descendants'] &&
-               Array.isArray(data['descendants']) && 
+               Array.isArray(data['descendants']) &&
               data['descendants'].length > 0) {
                 document.getElementById('mastodon-comments-list').innerHTML = "";
                 data['descendants'].forEach(function(reply) {
@@ -90,7 +90,7 @@
       </div>
       <div class="comment-author-date">${reply.created_date.toLocaleString(navigator.language, dateOptions)}</div>
     </div>
-    <div class="comment-content">${reply.content}</div> 
+    <div class="comment-content">${reply.content}</div>
   </div>
   </div>
   `;
